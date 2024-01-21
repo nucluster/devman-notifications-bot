@@ -21,13 +21,13 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 
-PRACTICUM_TOKEN = os.getenv('PRACTICUM_TOKEN')
+DEVMAN_TOKEN = os.getenv('PRACTICUM_TOKEN')
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
 RETRY_PERIOD = 300
-HEADERS = {'Authorization': f'OAuth {PRACTICUM_TOKEN}'}
-ENDPOINT = 'https://practicum.yandex.ru/api/user_api/homework_statuses/'
+HEADERS = {'Authorization': f'Token {DEVMAN_TOKEN}'}
+ENDPOINT = 'https://dvmn.org/api/user_reviews/'
 
 HOMEWORK_VERDICTS = {
     'approved': 'Работа проверена: ревьюеру всё понравилось. Ура!',
@@ -100,7 +100,7 @@ def parse_status(homework: dict) -> str:
 def check_tokens() -> bool:
     """Проверка наличия всех токенов."""
     tokens = {
-        'PRACTICUM_TOKEN': PRACTICUM_TOKEN,
+        'PRACTICUM_TOKEN': DEVMAN_TOKEN,
         'TELEGRAM_TOKEN': TELEGRAM_TOKEN,
         'TELEGRAM_CHAT_ID': TELEGRAM_CHAT_ID
     }
