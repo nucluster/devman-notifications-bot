@@ -1,0 +1,14 @@
+[Unit]
+Description=tgbot
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+User=vladimir
+WorkingDirectory=/home/vladimir/homework_bot
+ExecStart=/home/vladimir/homework_bot/venv/bin/python /home/vladimir/homework_bot/homework.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
