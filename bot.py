@@ -1,7 +1,7 @@
-from time import time, sleep
 import logging
 import os
 import sys
+from time import sleep, time
 
 import requests
 import telegram
@@ -43,7 +43,8 @@ def send_message(msg: str) -> None:
 if __name__ == "__main__":
     while True:
         try:
-            response = requests.get(url, headers=headers, params=params, timeout=timeout)
+            response = requests.get(
+                url, headers=headers, params=params, timeout=timeout)
             response.raise_for_status()
             data = response.json()
             status = data.get("status")
@@ -58,7 +59,7 @@ if __name__ == "__main__":
                 if new_attempts["is_negative"]:
                     message += f'Есть замечания. {lesson_url}'
                 else:
-                    message += f'Замечаний нет. Работа принята.'
+                    message += 'Замечаний нет. Работа принята.'
                 send_message(message)
                 params["timestamp"] = data.get("last_attempt_timestamp")
         except requests.exceptions.HTTPError as err:
@@ -66,7 +67,7 @@ if __name__ == "__main__":
             sleep(5)
             continue
         except requests.exceptions.ReadTimeout as err:
-            logger.error(f"Ошибка таймаута")
+            logger.error(f"Ошибка таймаута {err}")
             sleep(5)
             continue
         except requests.exceptions.ConnectionError as err:
