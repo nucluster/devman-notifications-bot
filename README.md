@@ -1,4 +1,4 @@
-# Devman Checker Telegram Bot
+# Devman Notifications Telegram Bot
 
 This Python script uses the Devman API to monitor the status of code submissions and sends notifications to a Telegram chat when a task is reviewed.
 
@@ -23,7 +23,7 @@ git clone https://github.com/nucluster/devman-notifications-bot.git
 
 ```bash
 
-cd devman-checker-bot
+cd devman-notifications-bot
 ```
 2. Create a virtual environment:
 
@@ -32,7 +32,10 @@ python -m venv venv
 ```
 
 3. Activate the virtual environment:
-
+ - On Windows:
+```bash
+.\venv\Scripts\activate
+```
  - On Unix or MacOS:
 ```bash
 source venv/bin/activate
