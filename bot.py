@@ -9,11 +9,6 @@ from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
 
-DEVMAN_TOKEN = os.getenv("DEVMAN_TOKEN")
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
-
-headers = {"Authorization": f"Token {DEVMAN_TOKEN}"}
 url = "https://dvmn.org/api/long_polling/"
 params = {"timestamp": time()}
 timeout = 120
@@ -64,7 +59,11 @@ def main():
 
 if __name__ == "__main__":
     load_dotenv()
+    DEVMAN_TOKEN = os.getenv("DEVMAN_TOKEN")
+    TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+    TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
+    headers = {"Authorization": f"Token {DEVMAN_TOKEN}"}
     logger.setLevel(logging.DEBUG)
     formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
     handler = logging.StreamHandler(stream=sys.stdout)
