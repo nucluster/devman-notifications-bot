@@ -7,7 +7,6 @@ import requests
 import telegram
 from dotenv import load_dotenv
 
-
 logger = logging.getLogger(__name__)
 
 DEVMAN_TOKEN = os.getenv("DEVMAN_TOKEN")
@@ -32,11 +31,11 @@ def main():
                 params["timestamp"] = check.get("timestamp_to_request")
                 logger.debug("В ответе отсутствуют новые статусы")
             elif status == "found":
-                last_attempt = check["last_attempt"][0]
-                lesson_title = last_attempt['lesson_title']
-                lesson_url = last_attempt['lesson_url']
+                new_attempt = check["new_attempts"][0]
+                lesson_title = new_attempt['lesson_title']
+                lesson_url = new_attempt['lesson_url']
                 message = f'Работа "{lesson_title}" проверена.\n\n'
-                if last_attempt["is_negative"]:
+                if new_attempt["is_negative"]:
                     message += f'Есть замечания. {lesson_url}'
                 else:
                     message += 'Замечаний нет. Работа принята.'
