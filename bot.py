@@ -35,7 +35,6 @@ def main():
                 else:
                     message += 'Замечаний нет. Работа принята.'
 
-                logger.info(f"Инициализируем бота {bot}")
                 logger.info(f"Бот пытается отправить сообщение: {message}")
                 try:
                     bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
@@ -45,14 +44,20 @@ def main():
 
             params["timestamp"] = check.get("last_attempt_timestamp")
         except requests.exceptions.HTTPError as err:
-            logger.error(f"Ошибка в процессе выполнения запроса: {err}")
+            msg = f"Ошибка в процессе выполнения запроса: {err}"
+            logger.error(msg)
+            bot.send_message(chat_id=TELEGRAM_CHAT_ID, message=msg)
             sleep(5)
             continue
         except requests.exceptions.ReadTimeout as err:
-            logger.error(f"Ошибка таймаута {err}")
+            msg = f"Ошибка таймаута {err}"
+            logger.error(msg)
+            bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=msg)
             continue
         except requests.exceptions.ConnectionError as err:
-            logger.error(f"Ошибка в процессе соединения с сервером: {err}")
+            msg = f"Ошибка в процессе соединения с сервером: {err}"
+            logger.error(msg)
+            bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=msg)
             sleep(5)
             continue
 
